@@ -1,0 +1,51 @@
+Purpose: Build a program to play a game of Hangman (against the computer)
+         in Python
+
+1. Display ASCII art header upon opening program (first instance only while
+    program is running)
+2. Greet player, have them input name (first instance only, save name for
+    future use) 
+3. Ask them to choose a category (animal, food, movie, etc.)
+    * (Get basic function of game working first before adding this feature)
+4. Computer chooses a random selection from a database (external text file)
+    * Later step
+    * Import module(s)?
+    * Account for options with spaces (ie. "Star Wars", "Clouded Leopard", etc.)
+5. Show screen with blank spaces & ASCII art of gallows
+6. Have player guess a letter
+    A. If letter is in word, replace blank space(s) with letter and display
+        current ASCII art
+    B. If letter is not in word, add a "body part" to ASCII art and display
+    C. If letter has already been guessed, tell player and have them guess
+        another letter
+    D. If character player enters is not a letter, do not accept input and have
+        them enter a valid character
+7. Each turn, display letters already guessed before guess is input
+8. End result: When word is correctly guessed before all ASCII "body parts" are
+    filled in, player wins, winning message is displayed;
+    Or when all "body parts" are filled in, player loses, losing message is
+        displayed and correct word is revealed
+9. Ask player if they want to play again
+    A. If yes, run game again (from step 3)
+    B. If no, exit program
+
+
+NOTES 2/13/17
+
+* Concepts to use:
+    A. While True/False, continue/break (use this to loop game again when done:
+        how?)
+
+* W/ current gallows graphics, player has 6 guesses, 7 completes the "man"
+    and loses.
+
+
+NOTES 2/18/17
+
+* Need to define separate functions to break down game operations.
+
+NOTES 2/23/17
+
+* Great meeting with my advisor on 2/20--broke project goals down into managable milestones.
+
+* Milestone 1: to build a function to replace blank spaces w/ correct letters.
