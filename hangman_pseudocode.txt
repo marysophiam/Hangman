@@ -49,3 +49,4 @@ NOTES 2/23/17
 * Great meeting with my advisor on 2/20--broke project goals down into managable milestones.
 
 * Milestone 1: to build a function to replace blank spaces w/ correct letters.
+    --Seems to be working now after an all-nighter.
