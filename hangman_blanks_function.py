@@ -36,7 +36,7 @@ replace_blanks_with_correct_letters()
 # inside this function, I ended up in an endless loop after the first guess
 # was made.
 
-# def have_player_guess_letter():
+def have_player_guess_letter():
 
     player_guess = raw_input('Guess a letter: ')
     return player_guess
