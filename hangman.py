@@ -113,6 +113,7 @@ def main():
     game_word = get_random_word()
     current_output = len(game_word) * ["_"]
     already_guessed = set()
+    # miss_counter = 0
     # game_is_over = False
 
     while True:
