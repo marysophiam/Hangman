@@ -161,15 +161,15 @@ def determine_and_display_outcome(current_output, game_word, miss_counter, game_
 
     if "_" not in current_output:
         game_over = True
-        print win_pic
-        print ''.join(current_output)
-        print "The word was " + game_word.upper() + ": Congratulations, you've won!"
+        print win_pic; print ""
+        print ''.join(current_output); print ""
+        print "The word was " + game_word.upper() + ": Congratulations, you've won! You're safe here on Earth."; print ""
 
     elif miss_counter == len(ufo_pics) - 1:
         game_over = True
-        print ufo_pics[6]; print ''
-        print ''.join(current_output)
-        print "The word was " + game_word.upper() + ": Too bad, you lose!"
+        print ufo_pics[6]; print " \n "
+        print ''.join(current_output); print ""
+        print "The word was " + game_word.upper() + ": Too bad, you lose--You've been abducted by aliens!"; print ""
 
     # Not really necessary for game to function properly, should it be included?
     # else:
@@ -200,8 +200,8 @@ def main():
 
     while True:
 
-        print_ufo_pics(ufo_pics, miss_counter); print ''
-        print ''.join(current_output)
+        print_ufo_pics(ufo_pics, miss_counter); print " \n "
+        print ''.join(current_output); print ''
         letter = have_player_guess_letter(already_guessed)
         replace_blanks_with_correct_letter(current_output, letter, game_word)
         already_guessed.update([letter])
