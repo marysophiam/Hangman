@@ -1,9 +1,89 @@
 import random
 
+
+ufo_pics = ['''
+     ___
+ ___/...\\___
+/   '---'   \\
+'--_______--'
+     / \\
+    /   \\
+    /\\0/\\
+    / | \\
+    // \\\\''', '''
+     ___
+ ___/...\\___
+/   '---'   \\
+'--_______--'
+     / \\
+    /   \\
+    /\\0/\\
+    / | \\
+    //  \\''', '''
+     ___
+ ___/...\\___
+/   '---'   \\
+'--_______--'
+     / \\
+    /   \\
+    /\\0/\\
+    / | \\
+    /   \\''','''
+     ___
+ ___/...\\___
+/   '---'   \\
+'--_______--'
+     / \\
+    /   \\
+    / 0/\\
+    / | \\
+    /   \\''','''
+     ___
+ ___/...\\___
+/   '---'   \\
+'--_______--'
+     / \\
+    /   \\
+    / 0 \\
+    / | \\
+    /   \\''','''
+     ___
+ ___/...\\___
+/   '---'   \\
+'--_______--'
+     / \\
+    /   \\
+    / 0 \\
+    /   \\
+    /   \\''', '''
+     ___
+ ___/...\\___
+/   '---'   \\
+'--_______--'
+     / \\
+    / B \\
+    / E \\
+    / A \\
+    / M \\'''
+]
+
+
+win_pic = '''
+                                   .''.       
+       .''.      .        *''*    :_\\/_:     . 
+      :_\\/_:   _\\(/_  .:.*_\\/_*   : /\\ :  .'.:.'.
+  .''.: /\ :   ./)\   ':'* /\ * :  '..'.  -=:o:=-
+ :_\\/_:'.:::.    ' *''*    * '.\\'/.' _\\(/_'.':'.'
+ : /\\ : :::::     *_\\/_*     -= o =-  /)\\    '  *
+  '..'  ':::'     * /\\ *     .'/.\\'.   '
+      *            *..*         :
+        *
+        *'''
+
+
 # For finished game, import .txt file(s) for word choice
 word_list = ["apple", "berry", "cherry", "arkansas", "mississippi", "hawaii", "serendipity", "insomnia"]    # sample list--good for testing
 
-gallows_pics = []
 
 def get_random_word():
 
@@ -11,42 +91,49 @@ def get_random_word():
     return random_word
 
 
+def print_ufo_pics(ufo_pics, miss_counter):
+
+    index = miss_counter
+    print ufo_pics[index]
+
+
 def have_player_guess_letter(already_guessed):
 
-    player_guess = raw_input("Guess a letter: ").upper()
+    guess = raw_input("Guess a letter: ").upper()
 
     while True:
 
-        if len(player_guess) != 1:
-            player_guess = raw_input("Please enter a single letter: ").upper()
-        elif player_guess in already_guessed:
-            player_guess = raw_input ("You've already guessed that letter, please choose another: ").upper()
-        elif not player_guess.isalpha():
-            player_guess = raw_input("Please enter a LETTER: ").upper()
+        if len(guess) != 1:
+            guess = raw_input("Please enter a single letter: ").upper()
+        elif guess in already_guessed:
+            guess = raw_input ("You've already guessed that letter, please choose another: ").upper()
+        elif not guess.isalpha():
+            guess = raw_input("Please enter a LETTER: ").upper()
         else:
             break
 
-    return player_guess
+    return guess
 
 
-# ***THIS IS ANOTHER VERSION OF THE ABOVE FUNCTION***
-# def have_player_guess_letter(already_guessed):
+# ***THIS IS A VARIANT OF THE ABOVE FUNCTION***
+
+# def have_guess_letter(already_guessed):
 
 #     valid_guess = False
-#     player_guess = raw_input("Guess a letter: ")
+#     guess = raw_input("Guess a letter: ")
 
 #     while not valid_guess:
 
-#         if len(player_guess) != 1:
-#             player_guess = raw_input("Please enter a single letter: ").upper()
-#         elif player_guess in already_guessed:
-#             player_guess = raw_input ("You've already guessed that letter, please choose another: ").upper()
-#         elif not player_guess.isalpha():
-#             player_guess = raw_input("Please enter a LETTER: ").upper()
+#         if len(guess) != 1:
+#             guess = raw_input("Please enter a single letter: ").upper()
+#         elif guess in already_guessed:
+#             guess = raw_input ("You've already guessed that letter, please choose another: ").upper()
+#         elif not guess.isalpha():
+#             guess = raw_input("Please enter a LETTER: ").upper()
 #         else:
 #             valid_guess = True
 
-#     return player_guess
+#     return guess
 
 
 def replace_blanks_with_correct_letter(current_output, guess, game_word):
@@ -56,47 +143,42 @@ def replace_blanks_with_correct_letter(current_output, guess, game_word):
             current_output[index] = letter
 
 
-# Use dictionary--keys are letters, values are True/False
 def record_and_display_guessed_letters(already_guessed, current_output):
     
     if (len(already_guessed) > 0) and ("_" in current_output):
             print "Letters you've guessed: " + ", ".join(sorted(already_guessed))
 
 
-# IN PROGRESS
-def check_if_player_has_won():
+def missed_guess_counter(letter, game_word, miss_counter):
 
-    found_all_letters = True
-
-    if "_" in current_output:
-        found_all_letters = False
-        # do something here
-
-    if found_all_letters:
-        print "Congratulations, you've won!"
-        game_is_over = True
-        # do something here
-
-
-# IN PROGRESS
-def missed_letter_counter():
-
-    if player_guess not in game_word():
+    if letter not in game_word:
         miss_counter += 1
+    
     return miss_counter
 
 
-# IN PROGRESS -- 2 separate functions or just 1?
-def determine_if_won_or_lost():
+def determine_and_display_outcome(current_output, game_word, miss_counter, game_over):
 
-    # do something here to determine if game is won
+    if "_" not in current_output:
+        game_over = True
+        print win_pic
+        print ''.join(current_output)
+        print "The word was " + game_word.upper() + ": Congratulations, you've won!"
 
-    if miss_counter == len(gallows_pics): # final intention; for testing purposes, set a number
-        print "You lose!"
+    elif miss_counter == len(ufo_pics) - 1:
+        game_over = True
+        print ufo_pics[6]; print ''
+        print ''.join(current_output)
+        print "The word was " + game_word.upper() + ": Too bad, you lose!"
+
+    # Not really necessary for game to function properly, should it be included?
+    # else:
+    #     game_over = False
+        
+    return game_over
 
 
-# IN PROGRESS
-def ask_if_play_again():
+def play_again():
 
     again = raw_input("Do you want to play again? Y/N: ").upper()
 
@@ -113,21 +195,30 @@ def main():
     game_word = get_random_word()
     current_output = len(game_word) * ["_"]
     already_guessed = set()
-    # miss_counter = 0
-    # game_is_over = False
+    miss_counter = 0
+    game_over = False
 
     while True:
 
+        print_ufo_pics(ufo_pics, miss_counter); print ''
+        print ''.join(current_output)
         letter = have_player_guess_letter(already_guessed)
         replace_blanks_with_correct_letter(current_output, letter, game_word)
         already_guessed.update([letter])
-        print ''.join(current_output)
+        miss_counter = missed_guess_counter(letter, game_word, miss_counter)
         record_and_display_guessed_letters(already_guessed, current_output)
-        if "_" not in current_output:
-            print "Congratulations, you've won!"
-            break
+        game_over = determine_and_display_outcome(current_output, game_word, miss_counter, game_over)
+
+        if game_over == True:
+            if play_again():
+                game_word = get_random_word()
+                current_output = len(game_word) * ["_"]
+                already_guessed = set()
+                miss_counter = 0
+                game_over = False
+            else:
+                break
 
 
 if __name__ == "__main__":
     main()
-
