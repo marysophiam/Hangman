@@ -82,7 +82,7 @@ win_pic = '''
 
 
 # For finished game, import .txt file(s) for word choice
-word_list = ["apple", "berry", "cherry", "arkansas", "mississippi", "hawaii", "serendipity", "insomnia"]    # sample list--good for testing
+word_list = ["apple", "berry", "cherry", "arkansas", "mississippi", "hawaii", "serendipity", "insomnia"] # sample list--good for testing
 
 
 def get_random_word():
