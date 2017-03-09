@@ -192,6 +192,9 @@ def play_again():
 
 def main():
 
+    print "\nWelcome to the game of ALIEN ABDUCTION!\n"
+    print "Guess the word before the UFO beams you up!"
+
     game_word = get_random_word()
     current_output = len(game_word) * ["_"]
     already_guessed = set()
