@@ -81,10 +81,6 @@ win_pic = '''
         *'''
 
 
-# Sample list--good for testing
-# For finished game, import .txt file(s) for word choice
-#word_list = ["apple", "berry", "cherry", "arkansas", "mississippi", "hawaii", "serendipity", "insomnia"]
-
 def load_words():
 
     with open("hangman_words.txt", mode = "r") as word_list:
