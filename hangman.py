@@ -120,27 +120,6 @@ def have_player_guess_letter(already_guessed):
     return guess
 
 
-# ***THIS IS A VARIANT OF THE ABOVE FUNCTION***
-
-# def have_guess_letter(already_guessed):
-
-#     valid_guess = False
-#     guess = raw_input("Guess a letter: ")
-
-#     while not valid_guess:
-
-#         if len(guess) != 1:
-#             guess = raw_input("Please enter a single letter: ").upper()
-#         elif guess in already_guessed:
-#             guess = raw_input ("You've already guessed that letter, please choose another: ").upper()
-#         elif not guess.isalpha():
-#             guess = raw_input("Please enter a LETTER: ").upper()
-#         else:
-#             valid_guess = True
-
-#     return guess
-
-
 def replace_blanks_with_correct_letter(current_output, guess, game_word):
 
     for index, letter in enumerate(game_word):
@@ -167,25 +146,28 @@ def missed_guess_counter(letter, game_word, miss_counter):
     return miss_counter
 
 
-def determine_and_display_outcome(current_output, game_word, miss_counter, game_over):
+def check_if_game_over(game_over, current_output, miss_counter):
 
     if "_" not in current_output:
         game_over = True
+    elif miss_counter == len(ufo_pics) - 1:
+        game_over = True
+    # else:
+    #     game_over = False
+
+    return game_over
+
+
+def display_outcome(current_output, miss_counter, game_word):
+
+    if "_" not in current_output:
         print win_pic; print ""
         print "   " + "".join(current_output); print ""
         print "The word was " + game_word.upper() + ": Congratulations, you've won! You're safe here on Earth."; print ""
-
     elif miss_counter == len(ufo_pics) - 1:
-        game_over = True
         print ufo_pics[-1]; print " \n "
         print "   " + "".join(current_output); print ""
         print "The word was " + game_word.upper() + ": Too bad, you lose--You've been abducted by aliens!"; print ""
-
-    # Not really necessary for game to function properly, should it be included?
-    # else:
-    #     game_over = False
-        
-    return game_over
 
 
 def play_again():
@@ -222,9 +204,10 @@ def main():
         replace_blanks_with_correct_letter(current_output, letter, game_word)
         record_guessed_letters(already_guessed, letter)
         miss_counter = missed_guess_counter(letter, game_word, miss_counter)
-        game_over = determine_and_display_outcome(current_output, game_word, miss_counter, game_over)
+        game_over = check_if_game_over(game_over, current_output, miss_counter)
 
         if game_over == True:
+            display_outcome(current_output, miss_counter, game_word)
             if play_again():
                 game_word = get_random_word(word_list)
                 current_output = len(game_word) * ["_"]
@@ -233,7 +216,6 @@ def main():
                 game_over = False
             else:
                 break
-
 
 if __name__ == "__main__":
     main()
