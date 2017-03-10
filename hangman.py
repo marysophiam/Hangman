@@ -83,9 +83,18 @@ win_pic = '''
 
 # Sample list--good for testing
 # For finished game, import .txt file(s) for word choice
-word_list = ["apple", "berry", "cherry", "arkansas", "mississippi", "hawaii", "serendipity", "insomnia"]
+#word_list = ["apple", "berry", "cherry", "arkansas", "mississippi", "hawaii", "serendipity", "insomnia"]
 
-def get_random_word():
+def load_words():
+
+    with open("hangman_words.txt", mode = "r") as word_list:
+        word_list = word_list.readlines()
+        word_list = [word.strip() for word in word_list]
+        
+    return word_list
+
+
+def get_random_word(word_list):
 
     random_word = random.choice(word_list).upper()
     return random_word
@@ -103,12 +112,12 @@ def have_player_guess_letter(already_guessed):
 
     while True:
 
-        if len(guess) != 1:
+        if guess.isdigit():
+            guess = raw_input("Please enter a LETTER: ").upper()
+        elif len(guess) != 1:
             guess = raw_input("Please enter a single letter: ").upper()
         elif guess in already_guessed:
             guess = raw_input ("You've already guessed that letter, please choose another: ").upper()
-        elif not guess.isalpha():
-            guess = raw_input("Please enter a LETTER: ").upper()
         else:
             break
 
@@ -141,6 +150,11 @@ def replace_blanks_with_correct_letter(current_output, guess, game_word):
     for index, letter in enumerate(game_word):
         if letter == guess:
             current_output[index] = letter
+
+
+def record_guessed_letters(already_guessed, letter):
+
+    already_guessed.update([letter])
 
 
 def display_guessed_letters(already_guessed, current_output):
@@ -182,12 +196,13 @@ def play_again():
 
     again = raw_input("Do you want to play again? Y/N: ").upper()
 
-    if again == "Y":
-        return True
-    elif again == "N":
-        return False
-    else:
-        again = raw_input("Not a valid choice, please enter Y/N: ").upper()
+    while True:
+        if again == "Y":
+            return True
+        elif again == "N":
+            return False
+        else:
+            again = raw_input("Not a valid choice, please enter Y/N: ").upper()
 
 
 def main():
@@ -195,7 +210,8 @@ def main():
     print "\nWelcome to the game of ALIEN ABDUCTION!\n"
     print "Guess the word before the UFO beams you up!"
 
-    game_word = get_random_word()
+    word_list = load_words()
+    game_word = get_random_word(word_list)
     current_output = len(game_word) * ["_"]
     already_guessed = set()
     miss_counter = 0
@@ -208,13 +224,13 @@ def main():
         display_guessed_letters(already_guessed, current_output); print ""
         letter = have_player_guess_letter(already_guessed)
         replace_blanks_with_correct_letter(current_output, letter, game_word)
-        already_guessed.update([letter])
+        record_guessed_letters(already_guessed, letter)
         miss_counter = missed_guess_counter(letter, game_word, miss_counter)
         game_over = determine_and_display_outcome(current_output, game_word, miss_counter, game_over)
 
         if game_over == True:
             if play_again():
-                game_word = get_random_word()
+                game_word = get_random_word(word_list)
                 current_output = len(game_word) * ["_"]
                 already_guessed = set()
                 miss_counter = 0
