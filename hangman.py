@@ -177,7 +177,7 @@ def determine_and_display_outcome(current_output, game_word, miss_counter, game_
 
     elif miss_counter == len(ufo_pics) - 1:
         game_over = True
-        print ufo_pics[6]; print " \n "
+        print ufo_pics[-1]; print " \n "
         print "   " + "".join(current_output); print ""
         print "The word was " + game_word.upper() + ": Too bad, you lose--You've been abducted by aliens!"; print ""
 
