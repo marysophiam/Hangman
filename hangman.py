@@ -104,16 +104,16 @@ def print_ufo_pics(ufo_pics, miss_counter):
 
 def have_player_guess_letter(already_guessed):
 
-    guess = raw_input("Guess a letter: ").upper(); print ""
+    guess = raw_input("Guess a letter: ").upper()
 
     while True:
 
         if guess.isdigit():
-            guess = raw_input("Please enter a LETTER: ").upper(); print ""
+            guess = raw_input("Please enter a LETTER: ").upper()
         elif len(guess) != 1:
-            guess = raw_input("Please enter a single letter: ").upper(); print ""
+            guess = raw_input("Please enter a single letter: ").upper()
         elif guess in already_guessed:
-            guess = raw_input ("You've already guessed that letter, please choose another: ").upper(); print ""
+            guess = raw_input ("You've already guessed that letter, please choose another: ").upper()
         else:
             break
 
