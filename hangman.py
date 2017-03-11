@@ -164,7 +164,7 @@ def display_outcome(current_output, miss_counter, game_word):
         print win_pic; print ""
         print "   " + "".join(current_output); print ""
         print "The word was " + game_word.upper() + ": Congratulations, you've won! You're safe here on Earth."; print ""
-    elif miss_counter == len(ufo_pics) - 1:
+    else:
         print ufo_pics[-1]; print " \n "
         print "   " + "".join(current_output); print ""
         print "The word was " + game_word.upper() + ": Too bad, you lose--You've been abducted by aliens!"; print ""
