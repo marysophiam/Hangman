@@ -152,8 +152,8 @@ def check_if_game_over(game_over, current_output, miss_counter):
         game_over = True
     elif miss_counter == len(ufo_pics) - 1:
         game_over = True
-    # else:
-    #     game_over = False
+    else:
+        game_over = False
 
     return game_over
 
