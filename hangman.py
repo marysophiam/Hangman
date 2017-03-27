@@ -279,7 +279,8 @@ def play_game():
     record_guessed_letters(already_guessed, letter)
     miss_counter = missed_guess_counter(letter, game_word, miss_counter)
     game_over = check_if_game_over(game_over, current_output, miss_counter)
-    display_outcome(current_output, miss_counter, game_word)
+    
+  display_outcome(current_output, miss_counter, game_word)
 
 
 def main():
